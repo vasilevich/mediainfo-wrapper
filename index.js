@@ -107,10 +107,11 @@ module.exports = function MediaInfo() {
     var cmd_options = typeof args[0] === "object" ? args.shift() : {};
     var cmd = [];
 
-    cmd.push(getCmd()); // base command
+    cmd.push(cmd_options.cmd || getCmd()); // base command
     cmd.push('--Output=XML --Full'); // args
     Array.prototype.slice.apply(args).forEach(function (val, idx) {
-        var files = glob.sync(val, {cwd: (cmd_options.cwd || process.cwd()), nonull: true});
+        var files = glob.sync(val, {cwd: (
+            .cwd || process.cwd()), nonull: true});
         for (var i in files) {
             cmd.push(safeLocalPath(files[i])); // files
         }
