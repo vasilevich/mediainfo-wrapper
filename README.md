@@ -22,6 +22,18 @@ mi('foo/bar.mkv', 'foo/bar2.avi').then(function(data) {
 }).catch(function (e){console.error(e)});
 ```
 
+### My modification:
+You can now give path to your own mediainfo as an option:
+```js
+var mi = require('mediainfo-wrapper');
+mi({cmd:'/usr/bin/mediainfo'},'foo/bar.mkv', 'foo/bar2.avi').then(function(data) {
+  for (var i in data) {
+    console.log('%s parsed', data[i].file);
+    console.log('MediaInfo data:', data[i]);
+  }
+}).catch(function (e){console.error(e)});
+```
+
 ### Using child_process power
 
 You can pass an object as first argument to use exec options. See [Node child_process](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback).
